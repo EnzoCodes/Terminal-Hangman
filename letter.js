@@ -4,7 +4,7 @@
 // or not the user has guessed the letter. This should contain letter
 // specific logic and data.
 
-var Letterfy = function(letter, number){
+var Letter = function(letter, number){
 
     this.letter = letter;
     this.number = number;
@@ -19,4 +19,4 @@ var Letterfy = function(letter, number){
     }
 };
 
-module.export = Letterfy;
+module.exports = Letter;

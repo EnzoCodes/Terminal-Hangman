@@ -5,6 +5,7 @@ var Letter = require("./letter.js");
 
 var Word = function(word) {
     console.log("---------- CHOOSING WORD ----------");
+    console.log(word);
 
     this.nWord = [];
     this.cLetter = [];
@@ -13,16 +14,17 @@ var Word = function(word) {
     this.functions = function(flag){
 
         for (var i = 0; i < this.word.length; i++){
-            var x = new Letterfy(this.word[i], flag)
-            this.nWord.push( x.showLetter() );
+            var x = new Letter(this.word[i], flag)
+            this.nWord.push( x.display() )
         }
-    }
+    };
     this.checkLetter =  function(letter) {
         if (this.randWord.indexOf(letter) > -1) {
 
             for (var i = 0; i < this.nWord.length; i++) {
                 if (this.word.charAt(i) == letter) {
-                    this.nWord[i] = new Letterfy(this.word[i], true).showLetter();
+                    this.nWord[i] = new Letter(this.word[i], true);
+                    this.showLetter();
                 }
             }
             return true
@@ -30,17 +32,17 @@ var Word = function(word) {
             this.cLetter.push(letter);
             return false;
         }
-    }
+    };
 
     this.checkWin = function(){
         for (var i = 0; i < this.randWord.length; i++) {
             if (this.randWord[i] != this.nWord[i]) {
                 return false;
+                } else {
+                return true;
+                }
             }
-        } else {
-            return true;
         }
-    }
     this.showWord = function(){
         console.log(this.nWord.join(" "));
     }
@@ -54,10 +56,8 @@ var Word = function(word) {
             return true;
         }
     }
-
-
 };
 
 
 
-module.export = Word;
+module.exports = Word;

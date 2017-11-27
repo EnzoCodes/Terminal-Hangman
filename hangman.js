@@ -8,7 +8,7 @@ var dictionary = ["cat", "dog", "kitten", "painting", "parrot", "artist", "progr
 gameStart();
 
 function randomO(){
-    return Math.floor(Math.random() * dictionary.length) + 1;
+    return Math.floor(Math.random() * dictionary.length);
 }
 
 // You must keep track of the user's remaining guesses and prompt the user if they would like to end the game if none remain.
@@ -16,23 +16,22 @@ function randomO(){
 // Each constructor function should be in it's own file and be exported and required wherever needed.
 function uInput(check, count) {
     if (count > 0) {
-        inquirer.promt([{
+        inquirer.prompt([{
             type: "input",
             message: "Enter a letter: ",
-            name: "guess"
+            name: "guess",
             validate: function(value) {
-                if (isNan(value) && value.length == 1 && check.newLetter(value)) {
+                if (isNaN(value) && value.length == 1 && check.checkLetter(value)) {
                     return true;
                 } else {
                     return false;
-                },
+                }
             }
         }]).then(function(data) {
             if (check.checkLetter(data.guess.toLowerCase())) {
-                check.showGuess();
+                check.showWord();
                 console.log("Correct!");
                 console.log("Remaining Guesses: " + count);
-                check.showWord();
 
                 if (check.checkWin() == true) {
                     console.log("You win!");
@@ -43,7 +42,7 @@ function uInput(check, count) {
             } else {
                 console.log("Incorrect Entry");
                 count--;
-                check.showGuess();
+                check.showWord();
                 console.log("Remaining Guesses: " + count);
                 check.showWord();
                 uInput(check, count);
